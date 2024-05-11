@@ -42,8 +42,8 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           password: ${{ secrets.EC2_PASSWORD }}
-          source: "target/HRISApp.war"
-          target: "/home/ubuntu/HRISApp.war"
+          source: "target/*.war"
+          target: "/home/ubuntu/"
 
       - name: SSH into EC2 and restart application
         uses: appleboy/ssh-action@master
