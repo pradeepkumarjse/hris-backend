@@ -27,7 +27,7 @@ jobs:
         run: mvn test
         
       - name: list dir
-        run: mvn test  
+        run: ls -al
 
   deploy:
     name: Deploy to EC2
