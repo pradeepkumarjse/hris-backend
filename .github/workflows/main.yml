@@ -23,8 +23,8 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Run Tests
-        run: mvn test
+      # - name: Run Tests
+      #   run: mvn test
         
       - name: list dir
         run: |
@@ -44,6 +44,8 @@ jobs:
           password: ${{ secrets.EC2_PASSWORD }}
           source: "*" 
           target: "/"
+          tar_dereference: true
+          rm: true
 
 
       - name: SSH into EC2 and restart application
