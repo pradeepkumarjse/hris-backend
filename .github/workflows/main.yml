@@ -36,15 +36,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      # - name: Copy Jar file to EC2
-      #   uses: appleboy/scp-action@v0.1.7
-      #   with:
-      #     host: ${{ secrets.EC2_HOST }}
-      #     username: ${{ secrets.EC2_USERNAME }}
-      #     password: ${{ secrets.EC2_PASSWORD }}
-      #     port: 22
-      #     source: "target/*.war"
-      #     target: "/home/ubuntu/"
+      - name: Copy Jar file to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          password: ${{ secrets.EC2_PASSWORD }}
+          port: 22
+          script: |
+           scp -r target/HRISApp.war ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/ubuntu/
 
       - name: SSH into EC2 and restart application
         uses: appleboy/ssh-action@master
