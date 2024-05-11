@@ -38,8 +38,8 @@ jobs:
             username: ${{ secrets.EC2_USERNAME }}
             key: ${{ secrets.EC2_KEY }}
             port: 22
-            source: "*" 
-            target: "/home/ubuntu/demo"
+            source: "./target/*" 
+            target: "/home/ubuntu"
   
   
   
