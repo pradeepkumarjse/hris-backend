@@ -30,29 +30,24 @@ jobs:
         run: |
           cd target
           ls -al
-
-  deploy:
-    name: Deploy to EC2
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+          
       - name: Copy Jar file to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_KEY }}
-          port: 22
-          source: "./target" 
-          target: "/home/ubuntu/demo"
-
-
-
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USERNAME }}
+            key: ${{ secrets.EC2_KEY }}
+            port: 22
+            source: "*" 
+            target: "/home/ubuntu/demo"
+  
+  
+  
       - name: SSH into EC2 and restart application
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          password: ${{ secrets.EC2_PASSWORD }}
-          script: |
-           ls -al
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USERNAME }}
+            password: ${{ secrets.EC2_PASSWORD }}
+            script: |
+             ls -al
