@@ -50,5 +50,4 @@ jobs:
             username: ${{ secrets.EC2_USERNAME }}
             password: ${{ secrets.EC2_PASSWORD }}
             script: |
-              pkill -f "java -jar ./target/HRISApp.war"  # Kill existing Java process
-              nohup java -jar ./target/HRISApp.war &      # Start the application in the background
+              "java -jar ./target/HRISApp.war"
