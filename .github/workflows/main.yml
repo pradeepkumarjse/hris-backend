@@ -50,4 +50,6 @@ jobs:
             username: ${{ secrets.EC2_USERNAME }}
             password: ${{ secrets.EC2_PASSWORD }}
             script: |
-              "java -jar ./target/HRISApp.war"
+              cd target
+              "java -jar HRISApp.war" 
+              nohup java -jar HRISApp.war &      # Start the application in the background
