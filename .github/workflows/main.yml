@@ -1,0 +1,53 @@
+name: CI/CD with Spring Boot
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11' # Specify the version of Java you want to use
+          distribution: 'adopt' # Specify the distribution of Java, such as 'adopt', 'adopt@1.11', etc.
+      
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      # - name: Run Tests
+      #   run: mvn test
+        
+      - name: list dir
+        run: |
+          cd target
+          ls -al
+          
+      - name: Copy Jar file to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USERNAME }}
+            key: ${{ secrets.EC2_KEY }}
+            port: 22
+            source: "./target/*" 
+            target: "/home/ubuntu"
+  
+  
+  
+      - name: SSH into EC2 and restart application
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USERNAME }}
+            password: ${{ secrets.EC2_PASSWORD }}
+            script: |
+             ls -al
