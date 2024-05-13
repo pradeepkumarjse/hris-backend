@@ -56,4 +56,11 @@ public class OrganizationController {
         organizationService.deleteOrganization(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    
+   @GetMapping("/test")
+    public ResponseEntity<List<Organization>> getAllOrganizations() {
+        List<Organization> organizations = organizationService.getAllOrganizations();
+        return new ResponseEntity<>(organizations, HttpStatus.OK);
+    }
 }
