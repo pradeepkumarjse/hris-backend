@@ -34,7 +34,6 @@ public class User extends Auditable<String>  implements Serializable {
 	private String username;
         
 	@Column
-                 @JsonIgnore
 	private String password;
         
                   @Column
