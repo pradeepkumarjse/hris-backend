@@ -50,5 +50,5 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           password: ${{ secrets.EC2_PASSWORD }}
           script: |
-           pm2 restart all
+           sh  /home/ubuntu/SCRIPTS/new-version.sh
 
