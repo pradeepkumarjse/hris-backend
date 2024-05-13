@@ -43,12 +43,12 @@ jobs:
   
   
   
-      - name: SSH into EC2 and restart application
+      - name: SSH into EC2 and restart pm2
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           password: ${{ secrets.EC2_PASSWORD }}
           script: |
-           sh /home/ubuntu/SCRIPTS/restart-app.sh
+           pm2 restart all
 
