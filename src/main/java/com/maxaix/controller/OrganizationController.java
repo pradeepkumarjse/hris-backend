@@ -59,7 +59,7 @@ public class OrganizationController {
 
     
    @GetMapping("/testupdated")
-    public ResponseEntity<List<Organization>> getAllOrganizationsTest() {
+    public ResponseEntity<List<Organization>> getAllOrganizations() {
         List<Organization> organizations = organizationService.getAllOrganizations();
         return new ResponseEntity<>(organizations, HttpStatus.OK);
     }
