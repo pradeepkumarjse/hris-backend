@@ -46,12 +46,13 @@ jobs:
       - name: SSH into EC2 and restart application
         uses: appleboy/ssh-action@master
         with:
-            host: ${{ secrets.EC2_HOST }}
-            username: ${{ secrets.EC2_USERNAME }}
-            password: ${{ secrets.EC2_PASSWORD }}
-            script: |
-              set -e
-              pkill -f "java -jar ./target/HRISApp.war" || true  # Kill existing Java process (ignore failure)
-              echo "Java processes after termination:"
-              ps aux | grep java || true  # Print Java processes
-              nohup java -jar ./target/HRISApp.war &  # Start the application in the background
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          password: ${{ secrets.EC2_PASSWORD }}
+          script: |
+            set -e
+            pkill -f "java -jar /home/ubuntu/target/HRISApp.war" || true  # Kill existing Java process (ignore failure)
+            echo "Java processes after termination:"
+            ps aux | grep java || true  # Print Java processes
+            nohup java -jar /home/ubuntu/target/HRISApp.war &  # Start the application in the background
+
